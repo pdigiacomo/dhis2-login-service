@@ -91,7 +91,7 @@ public class LoginServiceTest
     	boolean unblockedUser = loginService.isBlocked(user);
     	
 //    	Verify
-    	assertEquals(false, unblockedUser);
+    	assertEquals(true, unblockedUser);
     }
     
     @Test
@@ -105,21 +105,7 @@ public class LoginServiceTest
     	boolean blockedUser = loginService.isBlocked(user);
     	
 //    	Verify
-    	assertEquals(true, blockedUser);
-    }
-    
-    @Test
-    public void testIsBlocked_inCache_overAttemptLimit() {
-//    	Prepare
-    	LoadingCache<String,Integer> cache = loginService.getUSERNAME_LOGIN_ATTEMPTS_CACHE();
-    	cache.put("foo", DefaultLoginService.MAX_ATTEMPTS + 1);
-    	User user = new User("foo");
-    	
-//    	Execute
-    	boolean blockedUser = loginService.isBlocked(user);
-    	
-//    	Verify
-    	assertEquals(true, blockedUser);
+    	assertEquals(false, blockedUser);
     }
     
     @Test
@@ -134,6 +120,6 @@ public class LoginServiceTest
     	boolean blockedUser = loginService.isBlocked(user);
     	
 //    	Verify
-    	assertEquals(false, blockedUser);
+    	assertEquals(true, blockedUser);
     }
 }
